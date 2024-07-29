@@ -1,0 +1,15 @@
+---
+- name: EDA Test
+  hosts: localhost
+  sources:
+    - redhatinsights.eda.insights:
+        host: 0.0.0.0
+        port: 6000
+     #   token: "{{ insights_integration_token | default('redhatinsightstoken', true) }}"
+
+  rules:
+    - name: EDA | Insights | Detect and remediate recommendation event from Insights
+      condition: event.payload.event_type == "integration-test"
+      actions:
+        - debug:
+            msg: "Got it"
